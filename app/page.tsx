@@ -1,3 +1,5 @@
+﻿import Link from "next/link";
+
 const ArrowUpRight = () => (
   <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
     <path d="M5.75 14.25 14.25 5.75M7 5.75h7.25V13" />
@@ -61,8 +63,8 @@ export default function Home() {
           </nav>
 
           <div className="header-actions">
-            <a className="button button-ghost-light" href="/login">Log in</a>
-            <a className="button button-light" href="/signup">Get started for free <ArrowUpRight /></a>
+            <Link className="button button-ghost-light" href="/sign-in">Log in</Link>
+            <Link className="button button-light" href="/sign-up">Get started for free <ArrowUpRight /></Link>
           </div>
 
           <details className="mobile-nav">
@@ -74,8 +76,8 @@ export default function Home() {
               <a href="#product">Product</a>
               <a href="#workflow">How it works</a>
               <a href="#results">Results</a>
-              <a href="/login">Log in</a>
-              <a href="/signup">Get started for free</a>
+              <Link href="/sign-in">Log in</Link>
+              <Link href="/sign-up">Get started for free</Link>
             </nav>
           </details>
         </header>
@@ -90,9 +92,9 @@ export default function Home() {
               Import your candidate list and let our AI agent automatically call, screen, and schedule interviews - 24/7, at scale, with zero manual effort.
             </p>
             <div className="hero-actions">
-              <a className="button button-light" href="/signup">
+              <Link className="button button-light" href="/sign-up">
                 Get started for free <ArrowUpRight />
-              </a>
+              </Link>
               <a className="text-link" href="#product">
                 See the agent in action <span aria-hidden="true">↓</span>
               </a>
@@ -226,10 +228,10 @@ export default function Home() {
           <h2>Make the first interview<br />your easiest one.</h2>
           <p>Import your next candidate list and launch your first AI voice screening campaign today.</p>
           <div className="final-cta-actions">
-            <a className="button button-ghost-light" href="/login">Log in</a>
-            <a className="button button-light" href="/signup">
+            <Link className="button button-ghost-light" href="/sign-in">Log in</Link>
+            <Link className="button button-light" href="/sign-up">
               Get started for free <ArrowUpRight />
-            </a>
+            </Link>
           </div>
         </div>
       </section>

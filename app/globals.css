@@ -163,6 +163,18 @@ h1 { max-width: 42rem; margin-bottom: var(--space-lg); color: var(--text-on-dark
 .final-cta { padding-block: 8rem; color: var(--text-on-dark); background: var(--surface-dark); text-align: center; }.final-cta .eyebrow { justify-content: center; }.final-cta h2 { color: var(--text-on-dark); }.final-cta p:not(.eyebrow) { max-width: 35rem; margin: var(--space-lg) auto var(--space-xl); color: #a3a3a3; font-size: 0.875rem; }.final-cta-actions { justify-content: center; }.final-cta-actions .button { min-width: 10rem; }
 footer { color: #777; background: var(--surface-dark); border-top: 0.0625rem solid #222; }.footer-inner { min-height: 7rem; display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: var(--space-xl); font-size: 0.6875rem; }.footer-inner .brand { color: var(--text-on-dark); }.footer-inner p { margin: 0; }.footer-inner nav { display: flex; gap: var(--space-lg); }
 
+.auth-shell { min-height: 100vh; display: flex; flex-direction: column; background: var(--surface-light); }
+.auth-header { height: 5rem; display: flex; align-items: center; border-bottom: 0.0625rem solid var(--border-default); }
+.auth-header .brand { color: var(--text-heading); }
+.auth-card-wrap { flex: 1; display: grid; place-items: center; padding: var(--space-2xl) var(--space-lg); }
+.auth-card { width: min(100%, 30rem); text-align: center; }
+.auth-eyebrow { margin: 0 0 var(--space-sm); color: var(--text-tertiary); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+.auth-card h1 { margin-bottom: var(--space-sm); color: var(--text-heading); font-size: 2rem; line-height: 1.1; letter-spacing: -0.04em; }
+.auth-subtitle { margin-bottom: var(--space-xl); color: var(--text-tertiary); font-size: 0.875rem; }
+.auth-card .cl-card { margin-inline: auto; text-align: left; }
+.auth-card .cl-internal-b3f6iu, .auth-card .cl-socialButtonsBlockButton { border-radius: var(--radius-md); }
+.auth-card .cl-cardBox { box-shadow: var(--shadow-md); }
+
 @media (max-width: 56rem) {
   .desktop-nav { display: none; }
   .site-header { grid-template-columns: 1fr auto auto; gap: var(--space-md); }

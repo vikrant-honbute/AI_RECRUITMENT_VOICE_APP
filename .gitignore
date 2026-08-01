@@ -107,3 +107,5 @@ ehthumbs.db:encryptable
 CLAUDE.md
 
 AGENTS.md
+# clerk configuration (can include secrets)
+/.clerk/
