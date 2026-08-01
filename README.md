@@ -1,4 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project using [Neon Postgres](https://neon.tech) and [Drizzle ORM](https://orm.drizzle.team).
+
+## Database Setup
+
+1. Create a Neon Postgres project and copy its connection string.
+2. Create `.env.local` in the project root from `.env.example`.
+3. Set `DATABASE_URL` to your Neon connection string.
+
+The database client is available through `getDb` in `lib/db`. The connection-only setup includes a health endpoint at `/api/health/db`; product tables can be added to `lib/db/schema.ts` as the application domain is implemented.
+
+Run Drizzle commands with:
+
+```bash
+npm run db:check
+npm run db:generate
+npm run db:migrate
+```
+
+Use `npm run db:push` for local schema iteration or `npm run db:studio` to inspect the database.
 
 ## Getting Started
 
