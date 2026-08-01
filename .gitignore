@@ -1,0 +1,109 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# =============================================================================
+# Node.js
+# =============================================================================
+node_modules/
+.npm/
+
+# =============================================================================
+# Next.js / Build Artifacts
+# =============================================================================
+/.next/
+/.vercel/
+/.output/
+/.cache/
+/out/
+/build/
+/dist/
+
+# =============================================================================
+# TypeScript / Transpiler Caches
+# =============================================================================
+*.tsbuildinfo
+*.tmp
+*.temp
+
+# Babel
+.babel/cache/
+
+# SWC
+/.swc/
+
+# =============================================================================
+# Linting & Testing (output only — source files stay tracked)
+# =============================================================================
+/coverage/
+/.nyc_output/
+
+# ESLint cache
+.eslintcache
+
+# Playwright / Cypress (test output)
+test-results/
+playwright-report/
+cypress/screenshots/
+cypress/videos/
+
+# =============================================================================
+# Environment Variables
+# =============================================================================
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env.*.local
+
+# Allow committing example/template env files
+!.env.example
+!.env.template
+!.env.development.example
+!.env.production.example
+
+# =============================================================================
+# Debug Logs
+# =============================================================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+debug.log*
+logs/
+*.log
+
+# =============================================================================
+# OS Files
+# =============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+ehthumbs.db
+ehthumbs.db:encryptable
+*[TIO]~
+*$RECYCLE.BIN*
+
+# Linux
+*~
+.nfs*
+
+CLAUDE.md
+
+AGENTS.md
