@@ -10,6 +10,7 @@ export default function ChatPanel({
   phase,
   draftAnswer,
   isSttSupported,
+  isMicMuted,
   onDraftChange,
   onConfirm,
   onReRecord,
@@ -20,6 +21,7 @@ export default function ChatPanel({
   phase: InterviewPhase;
   draftAnswer: string;
   isSttSupported: boolean;
+  isMicMuted: boolean;
   onDraftChange: (value: string) => void;
   onConfirm: () => void;
   onReRecord: () => void;
@@ -38,7 +40,8 @@ export default function ChatPanel({
     <div className="chat-panel" aria-label="Interview transcript">
       <div className="chat-panel-header">
         <span className="chat-panel-title">Live transcript</span>
-        {isListening && <span className="chat-panel-status listening">Listening…</span>}
+        {isListening && isMicMuted && <span className="chat-panel-status muted">Mic muted</span>}
+        {isListening && !isMicMuted && <span className="chat-panel-status listening">Listening…</span>}
         {phase === "thinking" && <span className="chat-panel-status thinking">Interviewer is thinking…</span>}
         {phase === "speaking" && <span className="chat-panel-status speaking">Interviewer is speaking</span>}
       </div>

@@ -79,6 +79,8 @@ export function useInterviewSession(interview: InterviewDetails, candidateName: 
   const listenTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastSpeechAtRef = useRef(0);
   const listeningRef = useRef(false);
+  const listeningWantedRef = useRef(false);
+  const mutedRef = useRef(false);
   const startedRef = useRef(false);
   const endedRef = useRef(false);
   const sessionIdRef = useRef<string | null>(null);
@@ -134,36 +136,50 @@ export function useInterviewSession(interview: InterviewDetails, candidateName: 
       listenTimeoutRef.current = null;
     }
     listeningRef.current = false;
-    recognitionRef.current?.stop();
+    listeningWantedRef.current = false;
+    const recognition = recognitionRef.current;
     recognitionRef.current = null;
+    if (recognition) {
+      try {
+        recognition.stop();
+      } catch {
+        // recognition already ended (e.g. "no-speech") — nothing to stop
+      }
+    }
   }, []);
 
   const endCall = useCallback(
-    async (completed: boolean) => {
+    (completed: boolean) => {
       if (endedRef.current) {
         return;
       }
       endedRef.current = true;
+      setPhase(completed ? "completed" : "ended");
       setAgentSpeaking(false);
-      stopListening();
-      stopMediaTracks();
       setAudioLevel(0);
-      await audioContextRef.current?.close().catch(() => undefined);
+      try {
+        stopListening();
+      } catch {
+        // best-effort cleanup
+      }
+      try {
+        stopMediaTracks();
+      } catch {
+        // best-effort cleanup
+      }
+      void audioContextRef.current?.close().catch(() => undefined);
       audioContextRef.current = null;
 
       const id = sessionIdRef.current;
       if (id) {
-        try {
-          await fetch("/api/interview/complete", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ sessionId: id, endedEarly: !completed }),
-          });
-        } catch {
+        void fetch("/api/interview/complete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId: id, endedEarly: !completed }),
+        }).catch(() => {
           // best-effort persistence; the session stays in_progress
-        }
+        });
       }
-      setPhase(completed ? "completed" : "ended");
     },
     [stopListening, stopMediaTracks],
   );
@@ -269,7 +285,7 @@ export function useInterviewSession(interview: InterviewDetails, candidateName: 
   const beginListening = useCallback(() => {
     const Recognition = getRecognitionConstructor();
 
-    if (!Recognition) {
+    if (!Recognition || mutedRef.current) {
       setDraftAnswer("");
       setPhase("reviewing");
       return;
@@ -309,15 +325,31 @@ export function useInterviewSession(interview: InterviewDetails, candidateName: 
 
     recognition.onend = () => {
       listeningRef.current = false;
+      if (listeningWantedRef.current && !endedRef.current && !mutedRef.current) {
+        try {
+          recognition.start();
+          listeningRef.current = true;
+        } catch {
+          // keep the listening state; the silence timer will wrap up
+        }
+      }
     };
 
     recognitionRef.current = recognition;
     listeningRef.current = true;
+    listeningWantedRef.current = true;
     lastSpeechAtRef.current = Date.now();
     setInterimText("");
     setDraftAnswer("");
     setPhase("listening");
-    recognition.start();
+    try {
+      recognition.start();
+    } catch {
+      listeningRef.current = false;
+      listeningWantedRef.current = false;
+      setPhase("reviewing");
+      return;
+    }
 
     silenceTimerRef.current = setInterval(() => {
       if (!listeningRef.current) {
@@ -473,11 +505,36 @@ export function useInterviewSession(interview: InterviewDetails, candidateName: 
 
   const toggleMic = useCallback(() => {
     const audioTrack = mediaStreamRef.current?.getAudioTracks()[0];
-    if (audioTrack) {
-      audioTrack.enabled = !audioTrack.enabled;
-      setIsMicMuted(!audioTrack.enabled);
+    if (!audioTrack) {
+      return;
     }
-  }, []);
+    audioTrack.enabled = !audioTrack.enabled;
+    const muted = !audioTrack.enabled;
+    mutedRef.current = muted;
+    setIsMicMuted(muted);
+
+    if (muted) {
+      // SpeechRecognition captures from the mic directly, so the track toggle
+      // alone would keep "recording" — stop it explicitly. If we were listening,
+      // finalize the current answer so the phase can't get stuck.
+      if (listeningWantedRef.current || listeningRef.current) {
+        finishListening();
+      } else {
+        setInterimText("");
+        setChatMessages((previous) => previous.filter((message) => message.id !== "interim"));
+      }
+    } else if (listeningWantedRef.current) {
+      const recognition = recognitionRef.current;
+      if (recognition && !listeningRef.current) {
+        try {
+          recognition.start();
+          listeningRef.current = true;
+        } catch {
+          // fall through; silence timer wraps up
+        }
+      }
+    }
+  }, [finishListening]);
 
   const toggleCamera = useCallback(() => {
     const videoTrack = mediaStreamRef.current?.getVideoTracks()[0];
@@ -491,6 +548,13 @@ export function useInterviewSession(interview: InterviewDetails, candidateName: 
     startedRef.current = false;
     setPhase("idle");
   }, []);
+
+  useEffect(() => {
+    if (videoRef.current && mediaStreamRef.current) {
+      videoRef.current.srcObject = mediaStreamRef.current;
+      void videoRef.current.play().catch(() => undefined);
+    }
+  }, [phase]);
 
   useEffect(() => {
     if (phase === "idle" || phase === "completed" || phase === "ended" || phase === "permission-denied") {

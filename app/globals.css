@@ -3,6 +3,7 @@
 :root {
   --surface-dark: #000000;
   --surface-light: #ffffff;
+  --surface-page: #f4f4f2;
   --surface-muted: #f5f5f5;
   --surface-soft: #eeeeeb;
   --text-primary: #404040;
@@ -39,7 +40,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--surface-light); color: var(--text-primary); font-family: var(--font-figtree), sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.5; }
+body { margin: 0; background: var(--surface-page); color: var(--text-primary); font-family: var(--font-figtree), sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.5; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 svg { width: 1.125rem; height: 1.125rem; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
@@ -166,8 +167,8 @@ h1 { max-width: 42rem; margin-bottom: var(--space-lg); color: var(--text-on-dark
 .final-cta { padding-block: 8rem; color: var(--text-on-dark); background: var(--surface-dark); text-align: center; }.final-cta .eyebrow { justify-content: center; }.final-cta h2 { color: var(--text-on-dark); }.final-cta p:not(.eyebrow) { max-width: 35rem; margin: var(--space-lg) auto var(--space-xl); color: #a3a3a3; font-size: 0.875rem; }.final-cta-actions { justify-content: center; }.final-cta-actions .button { min-width: 10rem; }
 footer { color: #777; background: var(--surface-dark); border-top: 0.0625rem solid #222; }.footer-inner { min-height: 7rem; display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: var(--space-xl); font-size: 0.6875rem; }.footer-inner .brand { color: var(--text-on-dark); }.footer-inner p { margin: 0; }.footer-inner nav { display: flex; gap: var(--space-lg); }
 
-.auth-shell { min-height: 100vh; display: flex; flex-direction: column; background: var(--surface-light); }
-.auth-header { height: 5rem; display: flex; align-items: center; border-bottom: 0.0625rem solid var(--border-default); }
+.auth-shell { min-height: 100vh; display: flex; flex-direction: column; background: var(--surface-page); }
+.auth-header { height: 5rem; display: flex; align-items: center; border-bottom: 0.0625rem solid var(--border-default); background: var(--surface-light); }
 .auth-header .brand { color: var(--text-heading); }
 .auth-card-wrap { flex: 1; display: grid; place-items: center; padding: var(--space-2xl) var(--space-lg); }
 .auth-card { width: min(100%, 30rem); text-align: center; }
@@ -257,7 +258,7 @@ footer { color: #777; background: var(--surface-dark); border-top: 0.0625rem sol
 }
 
 /* Authenticated application shell */
-.dashboard-app { min-height: 100vh; display: flex; color: var(--text-primary); background: #f8f8f6; }
+.dashboard-app { min-height: 100vh; display: flex; color: var(--text-primary); background: var(--surface-page); }
 .dashboard-app > .dashboard-sidebar { width: var(--sidebar-width, 17rem); flex: 0 0 var(--sidebar-width, 17rem); overflow: hidden; border-right: 0.0625rem solid var(--border-default); background: var(--surface-light); transition: width var(--motion-base) var(--ease-standard), flex-basis var(--motion-base) var(--ease-standard); }
 .dashboard-app > .dashboard-sidebar.collapsed { width: var(--sidebar-width-collapsed, 4.5rem); flex: 0 0 var(--sidebar-width-collapsed, 4.5rem); }
 .dashboard-sidebar-inner { width: var(--sidebar-width, 17rem); min-height: 100vh; padding: var(--space-lg) var(--space-md); display: flex; flex-direction: column; }
@@ -381,6 +382,7 @@ footer { color: #777; background: var(--surface-dark); border-top: 0.0625rem sol
 .chat-panel-title { color: var(--text-heading); font-size: 0.75rem; font-weight: 700; }
 .chat-panel-status { padding: 0.125rem 0.5rem; border-radius: var(--radius-pill); font-size: 0.625rem; font-weight: 700; }
 .chat-panel-status.listening { color: #92400e; background: #fef3c7; }
+.chat-panel-status.muted { color: var(--error); background: #fdecea; }
 .chat-panel-status.speaking { color: var(--violet-700); background: var(--violet-100); }
 .chat-panel-status.thinking { color: var(--text-tertiary); background: var(--surface-muted); }
 .chat-messages { padding: var(--space-md); overflow-y: auto; display: grid; align-content: start; gap: var(--space-sm); }

@@ -158,6 +158,7 @@ export default function LiveInterview({
           phase={session.phase}
           draftAnswer={session.draftAnswer}
           isSttSupported={session.isSttSupported}
+          isMicMuted={session.isMicMuted}
           onDraftChange={session.setDraftAnswer}
           onConfirm={() => void session.confirmAnswer()}
           onReRecord={session.beginListening}
