@@ -1,0 +1,1 @@
+export const MAX_INTERVIEW_QUESTIONS = 6;

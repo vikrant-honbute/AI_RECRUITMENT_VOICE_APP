@@ -9,6 +9,7 @@ export default function SignInPage() {
       subtitle="Access your candidate pipeline and AI voice interviews."
     >
       <SignIn
+        fallbackRedirectUrl="/dashboard"
         appearance={{
           variables: {
             colorPrimary: "#171717",

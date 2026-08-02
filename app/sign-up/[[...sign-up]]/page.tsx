@@ -9,6 +9,7 @@ export default function SignUpPage() {
       subtitle="Set up in under 10 minutes. No credit card required."
     >
       <SignUp
+        fallbackRedirectUrl="/dashboard"
         appearance={{
           variables: {
             colorPrimary: "#171717",

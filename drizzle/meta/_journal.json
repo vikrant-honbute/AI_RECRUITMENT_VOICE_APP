@@ -15,6 +15,13 @@
       "when": 1785600293130,
       "tag": "0001_stiff_orphan",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1785685686902,
+      "tag": "0002_nebulous_calypso",
+      "breakpoints": true
     }
   ]
 }
