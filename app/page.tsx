@@ -106,20 +106,20 @@ export default function Home() {
             <div className="signal-field" aria-hidden="true">
               {Array.from({ length: 23 }).map((_, index) => <span key={index} />)}
             </div>
-            <div className="call-card">
+              <div className="call-card">
               <div className="call-card-top">
                 <span className="live-dot" /> Live interview
-                <span>08:42</span>
+                <span>07:07</span>
               </div>
-              <div className="candidate-avatar">AC</div>
-              <strong>Amelia Chen</strong>
-              <p>Product Designer candidate</p>
+              <div className="candidate-avatar">VH</div>
+              <strong>Vikrant Honbute</strong>
+              <p>AI Engineer candidate</p>
               <div className="waveform" aria-label="Candidate is speaking">
                 {Array.from({ length: 31 }).map((_, index) => <span key={index} />)}
               </div>
               <div className="question-box">
                 <span>Agent is asking</span>
-                “Tell me about a product decision you changed after hearing from users.”
+                “Walk me through an AI system you designed, from problem to production.”
               </div>
               <div className="call-status"><Phone /> Screening call in progress</div>
             </div>
