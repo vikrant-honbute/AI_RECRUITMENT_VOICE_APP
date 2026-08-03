@@ -23,12 +23,26 @@ function BriefcaseIcon() {
   return <span className="stat-icon"><span aria-hidden="true">+</span></span>;
 }
 
+function formatFullDate(date: Date): string {
+  return date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+}
+
+function formatShortDate(date: Date): string {
+  return date.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
+}
+
+function dayOfMonth(date: Date): string {
+  return String(date.getDate()).padStart(2, "0");
+}
+
 export default function DashboardPage() {
+  const now = new Date();
+
   return (
     <div className="dashboard-overview">
       <section className="dashboard-welcome">
         <div>
-          <p className="dashboard-eyebrow">Sunday, August 2, 2026</p>
+          <p className="dashboard-eyebrow">{formatFullDate(now)}</p>
           <h2>Your hiring, in motion.</h2>
           <p className="dashboard-intro">Stay close to every candidate and keep your team moving forward.</p>
         </div>
@@ -81,12 +95,12 @@ export default function DashboardPage() {
           <div className="dashboard-panel-heading">
             <div>
               <p className="dashboard-eyebrow">Your calendar</p>
-              <h3>Monday, Aug 3</h3>
+              <h3>{formatShortDate(now)}</h3>
             </div>
             <CalendarDays aria-hidden="true" />
           </div>
           <div className="calendar-preview">
-            <span className="calendar-date">03</span>
+            <span className="calendar-date">{dayOfMonth(now)}</span>
             <div>
               <strong>3 interviews scheduled</strong>
               <span>Make space for great conversations.</span>
