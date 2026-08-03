@@ -217,8 +217,23 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             </button>
             <UserButton
               appearance={{
+                variables: {
+                  colorPrimary: "#171717",
+                  colorPrimaryForeground: "#DEE2E6",
+                  colorBackground: "#CED4DA",
+                  colorForeground: "#343A40",
+                  colorMuted: "#495057",
+                  colorInput: "#DEE2E6",
+                  colorInputForeground: "#0a0a0a",
+                  colorBorder: "#6C757D",
+                  borderRadius: "8px",
+                },
                 elements: {
                   avatarBox: "dashboard-user-button",
+                  card: {
+                    border: "1px solid #6C757D",
+                    boxShadow: "0 2px 8px rgb(0 0 0 / 8%)",
+                  },
                 },
               }}
             />

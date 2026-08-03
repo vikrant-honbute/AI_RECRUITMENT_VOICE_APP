@@ -13,18 +13,18 @@ export default function SignInPage() {
         appearance={{
           variables: {
             colorPrimary: "#171717",
-            colorPrimaryForeground: "#ffffff",
-            colorBackground: "#ffffff",
-            colorForeground: "#404040",
-            colorMuted: "#525252",
-            colorInput: "#ffffff",
+            colorPrimaryForeground: "#DEE2E6",
+            colorBackground: "#CED4DA",
+            colorForeground: "#343A40",
+            colorMuted: "#495057",
+            colorInput: "#DEE2E6",
             colorInputForeground: "#0a0a0a",
-            colorBorder: "#e5e5e5",
+            colorBorder: "#6C757D",
             borderRadius: "8px",
           },
           elements: {
             card: {
-              border: "1px solid #e5e5e5",
+              border: "1px solid #6C757D",
               borderRadius: "12px",
               boxShadow: "0 2px 8px rgb(0 0 0 / 8%)",
             },
